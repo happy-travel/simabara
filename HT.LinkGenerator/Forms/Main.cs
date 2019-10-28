@@ -40,7 +40,7 @@ namespace HT.LinkGenerator.Forms
 
             try
             {
-                await EdoClient.Create().SendLink(eMailTextBox.Text, new PaymentLinkData(
+                await EdoClientProvider.Get().SendLink(eMailTextBox.Text, new PaymentLinkData(
                         Convert.ToDecimal(priceTextBox.Text),
                         facilityTypeComboBox.Text,
                         currenciesComboBox.Text, commentsTextBox.Text))

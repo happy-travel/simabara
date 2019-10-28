@@ -32,8 +32,8 @@ namespace HT.LinkGenerator.Forms
                 
                 try
                 {
-                    var linkSettings = await EdoClient.Create()
-                        .GetSettings()
+                    var linkSettings = await EdoClientProvider.Get()
+                        .GetSharedSettings()
                         .ConfigureAwait(true);
                     
                     new Main(linkSettings).Show();

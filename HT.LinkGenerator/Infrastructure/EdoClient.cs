@@ -1,33 +1,27 @@
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using HT.LinkGenerator.Model;
-using HT.LinkGenerator.Settings;
 using Newtonsoft.Json;
 
 namespace HT.LinkGenerator.Infrastructure
 {
-    public class EdoClient
+    public class EdoClient : IDisposable
     {
-        private EdoClient(string apiUrl, BearerTokenHandler bearerTokenHandler)
+        public EdoClient(string apiUrl, BearerTokenHandler bearerTokenHandler)
         {
             _edoHttpClient = new HttpClient(bearerTokenHandler);
             _apiUrl = apiUrl;
         }
         
-        public static EdoClient Create()
+        public async Task<PaymentLinkSettings> GetSharedSettings()
         {
-            var settings = SettingsManager.GetSettings();
-            return new EdoClient(settings.ApiUrl, new BearerTokenHandler(settings.IdentityUrl, settings.ClientSecret));
-        }
-
-        public async Task<PaymentLinkSettings> GetSettings()
-        {
-            var currenciesString = await _edoHttpClient
+            var settingsString = await _edoHttpClient
                 .GetStringAsync($"{_apiUrl}/{GetSettingsUrl}");
 
-            return JsonConvert.DeserializeObject<PaymentLinkSettings>(currenciesString);
+            return JsonConvert.DeserializeObject<PaymentLinkSettings>(settingsString);
         }
 
         public async Task SendLink(string email, PaymentLinkData linkData)
@@ -38,6 +32,11 @@ namespace HT.LinkGenerator.Infrastructure
 
             if (result.StatusCode != HttpStatusCode.NoContent)
                 throw new HttpRequestException(result.ReasonPhrase);
+        }
+        
+        public void Dispose()
+        {
+            _edoHttpClient?.Dispose();
         }
         
         private const string GetSettingsUrl = "en/api/1.0/external/payment-links/settings";
