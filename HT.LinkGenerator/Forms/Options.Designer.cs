@@ -138,6 +138,7 @@ namespace HT.LinkGenerator.Forms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Options";
+            this.ShowIcon = false;
             this.Text = "Options";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Options_Load);
