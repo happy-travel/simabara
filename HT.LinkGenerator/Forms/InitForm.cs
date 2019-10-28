@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Windows.Forms;
 using HT.LinkGenerator.Infrastructure;
 using HT.LinkGenerator.Settings;
@@ -40,6 +41,16 @@ namespace HT.LinkGenerator.Forms
                     Hide();
                     break;
                 }
+                catch (Exception ex) when (ex is HttpRequestException || ex is InvalidOperationException )
+                {
+                    var result = new Options().ShowDialog();
+                    if (result == DialogResult.Cancel)
+                    {
+                        Close();
+                        return;
+                    }
+                }
+                
                 catch (Exception exception)
                 {
                     MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

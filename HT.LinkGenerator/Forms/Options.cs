@@ -18,7 +18,7 @@ namespace HT.LinkGenerator.Forms
             var settings = SettingsManager.Get();
             identityUrlTextBox.Text = settings.IdentityUrl;
             apiUrlTextBox.Text = settings.ApiUrl;
-            clientSecretTextBox.Text = settings.ClientSecret;
+            clientSecretTextBox.Text = settings.ClientSecret.ToInsecureString();
         }
 
         private async void okButton_Click(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace HT.LinkGenerator.Forms
             if (hasError)
                 return;
 
-            var settings = new AppSettings(identityUrlTextBox.Text, apiUrlTextBox.Text, clientSecretTextBox.Text);
+            var settings = new AppSettings(identityUrlTextBox.Text, apiUrlTextBox.Text, clientSecretTextBox.Text.ToSecureString());
             try
             {
                 await EdoClientProvider.Create(settings)

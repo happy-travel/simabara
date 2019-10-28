@@ -1,8 +1,10 @@
+using System.Security;
+
 namespace HT.LinkGenerator.Settings
 {
     public class AppSettings
     {
-        public AppSettings(string identityUrl, string apiUrl, string clientSecret)
+        public AppSettings(string identityUrl, string apiUrl, SecureString clientSecret)
         {
             IdentityUrl = identityUrl;
             ApiUrl = apiUrl;
@@ -11,7 +13,7 @@ namespace HT.LinkGenerator.Settings
 
         public bool IsValid => !string.IsNullOrWhiteSpace(IdentityUrl) &&
                                !string.IsNullOrWhiteSpace(ApiUrl) &&
-                               !string.IsNullOrWhiteSpace(ClientSecret);
+                               ClientSecret != null;
         
         public bool Equals(AppSettings other)
         {
@@ -30,6 +32,6 @@ namespace HT.LinkGenerator.Settings
         
         public string IdentityUrl { get; }
         public string ApiUrl { get; }
-        public string ClientSecret { get; }
+        public SecureString ClientSecret { get; }
     }
 }

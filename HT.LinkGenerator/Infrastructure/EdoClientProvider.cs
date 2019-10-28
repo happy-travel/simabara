@@ -19,7 +19,7 @@ namespace HT.LinkGenerator.Infrastructure
 
             static EdoClient CreateClient(AppSettings settings)
             {
-                return new EdoClient(settings.ApiUrl, new BearerTokenHandler(settings.IdentityUrl, settings.ClientSecret));
+                return new EdoClient(settings.ApiUrl, new BearerTokenHandler(settings.IdentityUrl, settings.ClientSecret.ToInsecureString()));
             }
         }
         

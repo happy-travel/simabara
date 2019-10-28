@@ -1,5 +1,6 @@
 using System.Configuration;
 using System.Reflection;
+using HT.LinkGenerator.Infrastructure;
 
 namespace HT.LinkGenerator.Settings
 {
@@ -11,10 +12,11 @@ namespace HT.LinkGenerator.Settings
                 OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
 
             var appSettings = configuration.AppSettings.Settings;
+            var clientSecret = StringEncryptor.DecryptString(appSettings[nameof(AppSettings.ClientSecret)]?.Value);
             
             return new AppSettings(appSettings[nameof(AppSettings.IdentityUrl)]?.Value, 
                 appSettings[nameof(AppSettings.ApiUrl)]?.Value,
-                appSettings[nameof(AppSettings.ClientSecret)]?.Value);
+                clientSecret);
         }
 
         public static void Set(AppSettings settings)
@@ -24,7 +26,10 @@ namespace HT.LinkGenerator.Settings
 
             UpdateSetting(nameof(AppSettings.ApiUrl), settings.ApiUrl);
             UpdateSetting(nameof(AppSettings.IdentityUrl), settings.IdentityUrl);
-            UpdateSetting(nameof(AppSettings.ClientSecret), settings.ClientSecret);
+
+            var encryptedClientSecret = StringEncryptor.EncryptString(settings.ClientSecret);
+            
+            UpdateSetting(nameof(AppSettings.ClientSecret), encryptedClientSecret);
             
             configuration.Save();
             ConfigurationManager.RefreshSection("appSettings");
