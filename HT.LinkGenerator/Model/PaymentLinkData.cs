@@ -2,7 +2,7 @@ namespace HT.LinkGenerator.Model
 {
     public readonly struct PaymentLinkData
     {
-        public PaymentLinkData(decimal price, string facility, string currency, string comment)
+        public PaymentLinkData(decimal price, string facility, Currencies currency, string comment)
         {
             Price = price;
             Facility = facility;
@@ -12,7 +12,7 @@ namespace HT.LinkGenerator.Model
 
         public decimal Price { get; }
         public string Facility { get; }
-        public string Currency { get; }
+        public Currencies Currency { get; }
         public string Comment { get; }
     }
 }

@@ -42,7 +42,8 @@ namespace HT.LinkGenerator.Forms
             {
                 var linkData = new PaymentLinkData(Convert.ToDecimal(priceTextBox.Text),
                     facilityTypeComboBox.Text,
-                    currenciesComboBox.Text, commentsTextBox.Text);
+                    Enum.Parse<Currencies>(currenciesComboBox.Text), 
+                    commentsTextBox.Text);
                 
                 await EdoClientProvider.Get()
                     .SendLink(eMailTextBox.Text, linkData)
