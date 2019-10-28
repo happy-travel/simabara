@@ -55,9 +55,7 @@ namespace HT.LinkGenerator.Forms
         private void Main_Load(object sender, EventArgs e)
         {
             currenciesComboBox.DataSource = _linkSettings.Currencies;
-            currenciesComboBox.SelectedIndex = currenciesComboBox.Items.IndexOf(_linkSettings.DefaultCurrency);
             facilityTypeComboBox.DataSource = _linkSettings.Facilities;
-            facilityTypeComboBox.SelectedIndex = facilityTypeComboBox.Items.IndexOf(_linkSettings.DefaultFacility);
         }
 
         private void comboBox_Changed(object sender, EventArgs e)

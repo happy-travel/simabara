@@ -21,9 +21,12 @@ namespace HT.LinkGenerator.Forms
                     MessageBox.Show("Invalid settings");
                     var result = new Options().ShowDialog();
                     if (result != DialogResult.OK)
+                    {
                         Close();
-                    else
-                        continue;
+                        return;
+                    }
+
+                    continue;
                 }
                 
                 try

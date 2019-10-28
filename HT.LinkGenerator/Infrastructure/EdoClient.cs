@@ -39,8 +39,8 @@ namespace HT.LinkGenerator.Infrastructure
                 throw new HttpRequestException(result.ReasonPhrase);
         }
         
-        private const string GetSettingsUrl = "en/api/1.0/paymentLinks/settings";
-        private const string SendLinkUrl = "en/api/1.0/paymentLinks/send";
+        private const string GetSettingsUrl = "en/api/1.0/external/payment-links/settings";
+        private const string SendLinkUrl = "en/api/1.0/external/payment-links/send";
         private readonly string _apiUrl;
         private readonly HttpClient _edoHttpClient;
     }
