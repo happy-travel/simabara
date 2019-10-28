@@ -4,11 +4,10 @@ namespace HT.LinkGenerator.Infrastructure
 {
     public static class EdoClientProvider
     {
-        public static EdoClient Get()
+        public static EdoClient Create(AppSettings settings)
         {
             lock (Locker)
             {
-                var settings = SettingsManager.GetSettings();
                 if (_currentClientInfo == default || !settings.Equals(_currentClientInfo.Settings))
                 {
                     _currentClientInfo.Client?.Dispose();

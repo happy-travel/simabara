@@ -16,12 +16,12 @@ namespace HT.LinkGenerator.Forms
         {
             while (true)
             {
-                var settings = SettingsManager.GetSettings();
+                var settings = SettingsManager.Get();
                 if (!settings.IsValid)
                 {
                     MessageBox.Show("Invalid settings", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     var result = new Options().ShowDialog();
-                    if (result != DialogResult.OK)
+                    if (result == DialogResult.Cancel)
                     {
                         Close();
                         return;
@@ -29,13 +29,13 @@ namespace HT.LinkGenerator.Forms
 
                     continue;
                 }
-                
+
                 try
                 {
-                    var linkSettings = await EdoClientProvider.Get()
+                    var linkSettings = await EdoClientProvider.Create(settings)
                         .GetSharedSettings()
                         .ConfigureAwait(true);
-                    
+
                     new Main(linkSettings).Show();
                     Hide();
                     break;
@@ -43,9 +43,7 @@ namespace HT.LinkGenerator.Forms
                 catch (Exception exception)
                 {
                     MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    var result = new Options().ShowDialog();
-                    if (result != DialogResult.OK)
-                        Close();
+                    Close();
                 }
             }
         }

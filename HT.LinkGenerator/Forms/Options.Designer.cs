@@ -43,32 +43,49 @@ namespace HT.LinkGenerator.Forms
             this.clientSecretTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize) (this.errorProvider)).BeginInit();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Identity url *";
+            // 
+            // label2
+            // 
             this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 22);
             this.label2.TabIndex = 1;
             this.label2.Text = "EDO url *";
+            // 
+            // label3
+            // 
             this.label3.Location = new System.Drawing.Point(12, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 22);
             this.label3.TabIndex = 2;
             this.label3.Text = "Client secret *";
+            // 
+            // identityUrlTextBox
+            // 
             this.identityUrlTextBox.Location = new System.Drawing.Point(118, 9);
             this.identityUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.identityUrlTextBox.Name = "identityUrlTextBox";
             this.identityUrlTextBox.Size = new System.Drawing.Size(428, 27);
             this.identityUrlTextBox.TabIndex = 3;
+            // 
+            // apiUrlTextBox
+            // 
             this.apiUrlTextBox.Location = new System.Drawing.Point(118, 42);
             this.apiUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.apiUrlTextBox.Name = "apiUrlTextBox";
             this.apiUrlTextBox.Size = new System.Drawing.Size(428, 27);
             this.apiUrlTextBox.TabIndex = 4;
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            // 
+            // okButton
+            // 
             this.okButton.Location = new System.Drawing.Point(118, 115);
             this.okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okButton.Name = "okButton";
@@ -77,6 +94,9 @@ namespace HT.LinkGenerator.Forms
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // cancelButton
+            // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Location = new System.Drawing.Point(268, 115);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -86,7 +106,13 @@ namespace HT.LinkGenerator.Forms
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // errorProvider
+            // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // clientSecretTextBox
+            // 
             this.clientSecretTextBox.Location = new System.Drawing.Point(118, 75);
             this.clientSecretTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clientSecretTextBox.Name = "clientSecretTextBox";
@@ -94,6 +120,9 @@ namespace HT.LinkGenerator.Forms
             this.clientSecretTextBox.Size = new System.Drawing.Size(428, 27);
             this.clientSecretTextBox.TabIndex = 8;
             this.clientSecretTextBox.UseSystemPasswordChar = true;
+            // 
+            // Options
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 168);

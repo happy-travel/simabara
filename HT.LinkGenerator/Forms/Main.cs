@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using HT.LinkGenerator.Infrastructure;
 using HT.LinkGenerator.Model;
+using HT.LinkGenerator.Settings;
 
 namespace HT.LinkGenerator.Forms
 {
@@ -45,7 +46,7 @@ namespace HT.LinkGenerator.Forms
                     Enum.Parse<Currencies>(currenciesComboBox.Text), 
                     commentsTextBox.Text);
                 
-                await EdoClientProvider.Get()
+                await EdoClientProvider.Create(SettingsManager.Get())
                     .SendLink(eMailTextBox.Text, linkData)
                     .ConfigureAwait(true);
 

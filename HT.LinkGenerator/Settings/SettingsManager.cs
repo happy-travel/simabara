@@ -5,7 +5,7 @@ namespace HT.LinkGenerator.Settings
 {
     public static class SettingsManager
     {
-        public static AppSettings GetSettings()
+        public static AppSettings Get()
         {
             var configuration = ConfigurationManager.
                 OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
@@ -17,7 +17,7 @@ namespace HT.LinkGenerator.Settings
                 appSettings[nameof(AppSettings.ClientSecret)]?.Value);
         }
 
-        public static void SaveSettings(AppSettings settings)
+        public static void Set(AppSettings settings)
         {
             var configuration = ConfigurationManager.
                 OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
