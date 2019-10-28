@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using HT.LinkGenerator.Infrastructure;
+using HT.LinkGenerator.Settings;
 
 namespace HT.LinkGenerator.Forms
 {

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using HT.LinkGenerator.Model;
+using HT.LinkGenerator.Settings;
 using Newtonsoft.Json;
 
 namespace HT.LinkGenerator.Infrastructure

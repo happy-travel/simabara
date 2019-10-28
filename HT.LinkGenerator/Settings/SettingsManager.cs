@@ -1,8 +1,7 @@
 using System.Configuration;
 using System.Reflection;
-using HT.LinkGenerator.Settings;
 
-namespace HT.LinkGenerator
+namespace HT.LinkGenerator.Settings
 {
     public static class SettingsManager
     {
