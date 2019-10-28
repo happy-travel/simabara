@@ -9,7 +9,7 @@ namespace HT.LinkGenerator.Infrastructure
             lock (Locker)
             {
                 var settings = SettingsManager.GetSettings();
-                if (!settings.Equals(_currentClientInfo.Settings))
+                if (_currentClientInfo == default || !settings.Equals(_currentClientInfo.Settings))
                 {
                     _currentClientInfo.Client?.Dispose();
                     _currentClientInfo = (settings, CreateClient(settings));

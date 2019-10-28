@@ -9,20 +9,9 @@ namespace HT.LinkGenerator.Settings
             ClientSecret = clientSecret;
         }
 
-        public bool IsValid
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(IdentityUrl) ||
-                    string.IsNullOrWhiteSpace(ApiUrl) ||
-                    string.IsNullOrWhiteSpace(ClientSecret))
-                {
-                    return false;
-                }
-
-                return true;
-            }
-        }
+        public bool IsValid => !string.IsNullOrWhiteSpace(IdentityUrl) &&
+                               !string.IsNullOrWhiteSpace(ApiUrl) &&
+                               !string.IsNullOrWhiteSpace(ClientSecret);
         
         public bool Equals(AppSettings other)
         {

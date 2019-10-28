@@ -19,7 +19,7 @@ namespace HT.LinkGenerator.Forms
                 var settings = SettingsManager.GetSettings();
                 if (!settings.IsValid)
                 {
-                    MessageBox.Show("Invalid settings");
+                    MessageBox.Show("Invalid settings", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     var result = new Options().ShowDialog();
                     if (result != DialogResult.OK)
                     {
@@ -42,7 +42,7 @@ namespace HT.LinkGenerator.Forms
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(exception.Message);
+                    MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     var result = new Options().ShowDialog();
                     if (result != DialogResult.OK)
                         Close();

@@ -40,15 +40,19 @@ namespace HT.LinkGenerator.Forms
 
             try
             {
-                await EdoClientProvider.Get().SendLink(eMailTextBox.Text, new PaymentLinkData(
-                        Convert.ToDecimal(priceTextBox.Text),
-                        facilityTypeComboBox.Text,
-                        currenciesComboBox.Text, commentsTextBox.Text))
+                var linkData = new PaymentLinkData(Convert.ToDecimal(priceTextBox.Text),
+                    facilityTypeComboBox.Text,
+                    currenciesComboBox.Text, commentsTextBox.Text);
+                
+                await EdoClientProvider.Get()
+                    .SendLink(eMailTextBox.Text, linkData)
                     .ConfigureAwait(true);
+
+                MessageBox.Show("Message sent", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
