@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using HT.LinkGenerator.Infrastructure;
 using HT.LinkGenerator.Model;
@@ -127,15 +127,13 @@ namespace HT.LinkGenerator.Forms
                 if (string.IsNullOrEmpty(email))
                     return false;
 
-                try
-                {
-                    var mail = new MailAddress(email);
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
+                // From https://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx/
+                const string validEmailPattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
+                                                 + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
+                                                 + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+
+                return new Regex(validEmailPattern, RegexOptions.IgnoreCase)
+                    .IsMatch(email);
             }
         }
     }
