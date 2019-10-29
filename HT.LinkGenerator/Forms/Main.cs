@@ -37,15 +37,19 @@ namespace HT.LinkGenerator.Forms
                 hasError |= !ValidateComboBox(comboBox);
 
             if (hasError)
-                return; 
+                return;
 
+            var buttonText = sendButton.Text;
             try
             {
+                sendButton.Enabled = false;
+                sendButton.Text = "Sending...";
+                
                 var linkData = new PaymentLinkData(Convert.ToDecimal(priceTextBox.Text),
                     facilityTypeComboBox.Text,
-                    Enum.Parse<Currencies>(currenciesComboBox.Text), 
+                    Enum.Parse<Currencies>(currenciesComboBox.Text),
                     commentsTextBox.Text);
-                
+
                 await EdoClientProvider.Create(SettingsManager.Get())
                     .SendLink(eMailTextBox.Text, linkData)
                     .ConfigureAwait(true);
@@ -55,6 +59,11 @@ namespace HT.LinkGenerator.Forms
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                sendButton.Text = buttonText;
+                sendButton.Enabled = true;
             }
         }
 
