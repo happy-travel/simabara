@@ -58,7 +58,7 @@ namespace HT.LinkGenerator.Infrastructure
         }
         
         private const string GetSettingsUrl = "en/api/1.0/external/payment-links/settings";
-        private const string SendLinkUrl = "en/api/1.0/external/payment-links/send";
+        private const string SendLinkUrl = "en/api/1.0/external/payment-links";
         private const string SupportedVersionsUrl = "en/api/1.0/external/payment-links/versions";
         private readonly string _apiUrl;
         private readonly HttpClient _edoHttpClient;

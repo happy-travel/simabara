@@ -7,6 +7,9 @@
         <Company>Happy Travel</Company>
         <Product>Link Generator</Product>
         <AssemblyVersion>0.1</AssemblyVersion>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <PublishSingleFile>true</PublishSingleFile>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     </PropertyGroup>
 
     <ItemGroup>
