@@ -18,9 +18,8 @@ namespace HT.LinkGenerator.Forms
             while (true)
             {
                 var settings = SettingsManager.Get();
-                if (!settings.IsValid)
+                if (!settings.IsSet)
                 {
-                    MessageBox.Show("Invalid settings", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     var result = new Options().ShowDialog();
                     if (result == DialogResult.Cancel)
                     {

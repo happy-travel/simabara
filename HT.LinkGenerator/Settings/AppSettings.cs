@@ -11,7 +11,7 @@ namespace HT.LinkGenerator.Settings
             ClientSecret = clientSecret;
         }
 
-        public bool IsValid => !string.IsNullOrWhiteSpace(IdentityUrl) &&
+        public bool IsSet => !string.IsNullOrWhiteSpace(IdentityUrl) &&
                                !string.IsNullOrWhiteSpace(ApiUrl) &&
                                ClientSecret != null;
         
