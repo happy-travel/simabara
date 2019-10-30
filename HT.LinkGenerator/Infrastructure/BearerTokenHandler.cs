@@ -26,7 +26,7 @@ namespace HT.LinkGenerator.Infrastructure
             var tokenResponse = await IdentityHttpClient.RequestClientCredentialsTokenAsync(
                 new ClientCredentialsTokenRequest
                 {
-                    Address = $"{_identityUrl}/connect/token",
+                    Address = UrlHelper.CombineUri(_identityUrl, "/connect/token"),
                     ClientId = "linkGenerator",
                     ClientSecret = _clientSecret,
                     Scope = "edo"

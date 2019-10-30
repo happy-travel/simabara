@@ -25,13 +25,13 @@ namespace HT.LinkGenerator.Infrastructure
                 throw new Exception("Version is not supported. Please install a new version of this app");
             
             var settingsString = await _edoHttpClient
-                .GetStringAsync($"{_apiUrl}/{GetSettingsUrl}");
+                .GetStringAsync(UrlHelper.CombineUri(_apiUrl, GetSettingsUrl));
 
             return JsonConvert.DeserializeObject<PaymentLinkSettings>(settingsString);
 
             async Task<bool> IsVersionNotSupported()
             {
-                var supportedVersionsString = await _edoHttpClient.GetStringAsync($"{_apiUrl}/{SupportedVersionsUrl}");
+                var supportedVersionsString = await _edoHttpClient.GetStringAsync(UrlHelper.CombineUri(_apiUrl, SupportedVersionsUrl));
                 var supportedVersions = JsonConvert
                     .DeserializeObject<List<DeserializableVersion>>(supportedVersionsString);
 
@@ -45,7 +45,7 @@ namespace HT.LinkGenerator.Infrastructure
         public async Task SendLink(string email, PaymentLinkData linkData)
         {
             var requestString = JsonConvert.SerializeObject(new SendPaymentLinkRequest(email, linkData));
-            var result = await _edoHttpClient.PostAsync($"{_apiUrl}/{SendLinkUrl}",
+            var result = await _edoHttpClient.PostAsync(UrlHelper.CombineUri(_apiUrl, SendLinkUrl),
                 new StringContent(requestString, Encoding.UTF8, "application/json"));
 
             if (result.StatusCode != HttpStatusCode.NoContent)
