@@ -52,15 +52,33 @@ namespace HT.LinkGenerator.Infrastructure
                 throw new HttpRequestException(result.ReasonPhrase);
         }
         
+        public async Task<string> GenerateUrl(PaymentLinkData linkData)
+        {
+            var requestString = JsonConvert.SerializeObject(linkData);
+            var result = await _edoHttpClient.PostAsync(UrlHelper.CombineUri(_apiUrl, GenerateLinkUrl),
+                new StringContent(requestString, Encoding.UTF8, "application/json"));
+
+            if (!result.IsSuccessStatusCode)
+                throw new HttpRequestException(result.ReasonPhrase);
+
+            return JsonConvert.DeserializeObject<string>(await result.Content.ReadAsStringAsync());
+        }
+
+        
+
         public void Dispose()
         {
             _edoHttpClient?.Dispose();
         }
-        
-        private const string GetSettingsUrl = "en/api/1.0/external/payment-links/settings";
-        private const string SendLinkUrl = "en/api/1.0/external/payment-links";
-        private const string SupportedVersionsUrl = "en/api/1.0/external/payment-links/versions";
+
+        private const string ControllerUrl = "en/api/1.0/external/payment-links";
+        private static readonly string GetSettingsUrl = $"{ControllerUrl}/settings";
+        private static readonly string SendLinkUrl = $"{ControllerUrl}/send";
+        private static readonly string GenerateLinkUrl = ControllerUrl;
+        private static readonly string SupportedVersionsUrl = $"{ControllerUrl}/versions";
         private readonly string _apiUrl;
         private readonly HttpClient _edoHttpClient;
+
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using HT.LinkGenerator.Infrastructure;
@@ -47,11 +48,7 @@ namespace HT.LinkGenerator.Forms
                 sendButton.Enabled = false;
                 sendButton.Text = "Sending...";
                 
-                var linkData = new PaymentLinkData(Convert.ToDecimal(priceTextBox.Text),
-                    eMailTextBox.Text,
-                    Convert.ToString(serviceTypeComboBox.SelectedValue),
-                    Enum.Parse<Currencies>(currenciesComboBox.Text),
-                    commentsTextBox.Text);
+                var linkData = GetLinkData();
 
                 await EdoClientProvider.Create(SettingsManager.Get())
                     .SendLink(linkData)
@@ -68,6 +65,52 @@ namespace HT.LinkGenerator.Forms
                 sendButton.Text = buttonText;
                 sendButton.Enabled = true;
             }
+        }
+        
+        private async void generateUrlButton_Click(object sender, EventArgs e)
+        {
+            var hasError = false;
+            hasError |= !ValidateEmail();
+            hasError |= !ValidatePrice();
+            foreach (var comboBox in new[] {currenciesComboBox, serviceTypeComboBox})
+                hasError |= !ValidateComboBox(comboBox);
+
+            if (hasError)
+                return;
+
+            var buttonText = generateUrlButton.Text;
+            try
+            {
+                generateUrlButton.Enabled = false;
+                generateUrlButton.Text = "Generating...";
+                
+                var linkData = GetLinkData();
+
+                var linkUrl = await EdoClientProvider.Create(SettingsManager.Get())
+                    .GenerateUrl(linkData)
+                    .ConfigureAwait(true);
+
+                var linkForm = new GeneratedLink(linkUrl);
+                linkForm.ShowDialog();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                generateUrlButton.Text = buttonText;
+                generateUrlButton.Enabled = true;
+            }
+        }
+
+        private PaymentLinkData GetLinkData()
+        {
+            return new PaymentLinkData(Convert.ToDecimal(priceTextBox.Text),
+                eMailTextBox.Text,
+                Convert.ToString(serviceTypeComboBox.SelectedValue),
+                Enum.Parse<Currencies>(currenciesComboBox.Text),
+                commentsTextBox.Text);
         }
 
         private void Main_Load(object sender, EventArgs e)
