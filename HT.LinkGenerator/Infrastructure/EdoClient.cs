@@ -42,13 +42,13 @@ namespace HT.LinkGenerator.Infrastructure
             }
         }
 
-        public async Task SendLink(string email, PaymentLinkData linkData)
+        public async Task SendLink(PaymentLinkData linkData)
         {
-            var requestString = JsonConvert.SerializeObject(new SendPaymentLinkRequest(email, linkData));
+            var requestString = JsonConvert.SerializeObject(linkData);
             var result = await _edoHttpClient.PostAsync(UrlHelper.CombineUri(_apiUrl, SendLinkUrl),
                 new StringContent(requestString, Encoding.UTF8, "application/json"));
 
-            if (result.StatusCode != HttpStatusCode.NoContent)
+            if (!result.IsSuccessStatusCode)
                 throw new HttpRequestException(result.ReasonPhrase);
         }
         

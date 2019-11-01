@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using HT.LinkGenerator.Infrastructure;
@@ -33,7 +35,7 @@ namespace HT.LinkGenerator.Forms
             var hasError = false;
             hasError |= !ValidateEmail();
             hasError |= !ValidatePrice();
-            foreach (var comboBox in new[] {currenciesComboBox, facilityTypeComboBox})
+            foreach (var comboBox in new[] {currenciesComboBox, serviceTypeComboBox})
                 hasError |= !ValidateComboBox(comboBox);
 
             if (hasError)
@@ -46,12 +48,13 @@ namespace HT.LinkGenerator.Forms
                 sendButton.Text = "Sending...";
                 
                 var linkData = new PaymentLinkData(Convert.ToDecimal(priceTextBox.Text),
-                    facilityTypeComboBox.Text,
+                    eMailTextBox.Text,
+                    Convert.ToString(serviceTypeComboBox.SelectedValue),
                     Enum.Parse<Currencies>(currenciesComboBox.Text),
                     commentsTextBox.Text);
 
                 await EdoClientProvider.Create(SettingsManager.Get())
-                    .SendLink(eMailTextBox.Text, linkData)
+                    .SendLink(linkData)
                     .ConfigureAwait(true);
 
                 MessageBox.Show("Message sent", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -70,7 +73,9 @@ namespace HT.LinkGenerator.Forms
         private void Main_Load(object sender, EventArgs e)
         {
             currenciesComboBox.DataSource = _linkSettings.Currencies;
-            facilityTypeComboBox.DataSource = _linkSettings.Facilities;
+            serviceTypeComboBox.ValueMember =  nameof(KeyValuePair<string, string>.Key);
+            serviceTypeComboBox.DisplayMember = nameof(KeyValuePair<string, string>.Value);
+            serviceTypeComboBox.DataSource = _linkSettings.ServiceTypes.ToList();
         }
 
         private void comboBox_Changed(object sender, EventArgs e)
@@ -98,7 +103,8 @@ namespace HT.LinkGenerator.Forms
         private bool ValidateComboBox(ComboBox comboBox)
         {
             errorProvider.SetError(comboBox, string.Empty);
-            if (comboBox.Items.IndexOf(comboBox.Text) < 0)
+            
+            if (comboBox.SelectedIndex < 0)
             {
                 errorProvider.SetError(comboBox, "Invalid selection");
                 return false;
