@@ -74,7 +74,7 @@ namespace HT.LinkGenerator.Forms
             this.identityUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.identityUrlTextBox.Name = "identityUrlTextBox";
             this.identityUrlTextBox.Size = new System.Drawing.Size(428, 27);
-            this.identityUrlTextBox.TabIndex = 3;
+            this.identityUrlTextBox.TabIndex = 10;
             // 
             // apiUrlTextBox
             // 
@@ -82,7 +82,7 @@ namespace HT.LinkGenerator.Forms
             this.apiUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.apiUrlTextBox.Name = "apiUrlTextBox";
             this.apiUrlTextBox.Size = new System.Drawing.Size(428, 27);
-            this.apiUrlTextBox.TabIndex = 4;
+            this.apiUrlTextBox.TabIndex = 20;
             // 
             // okButton
             // 
@@ -90,7 +90,7 @@ namespace HT.LinkGenerator.Forms
             this.okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(144, 34);
-            this.okButton.TabIndex = 6;
+            this.okButton.TabIndex = 40;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
@@ -102,7 +102,7 @@ namespace HT.LinkGenerator.Forms
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(145, 34);
-            this.cancelButton.TabIndex = 7;
+            this.cancelButton.TabIndex = 50;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -118,7 +118,7 @@ namespace HT.LinkGenerator.Forms
             this.clientSecretTextBox.Name = "clientSecretTextBox";
             this.clientSecretTextBox.PasswordChar = '*';
             this.clientSecretTextBox.Size = new System.Drawing.Size(428, 27);
-            this.clientSecretTextBox.TabIndex = 8;
+            this.clientSecretTextBox.TabIndex = 30;
             this.clientSecretTextBox.UseSystemPasswordChar = true;
             // 
             // Options
