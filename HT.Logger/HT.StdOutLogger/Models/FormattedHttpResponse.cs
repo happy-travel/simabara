@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StdOutLogger.Models
+namespace HT.StdOutLogger.Models
 {
     public readonly struct FormattedHttpResponse
     {
@@ -9,10 +9,9 @@ namespace StdOutLogger.Models
             StatusCode = statusCode;
             Headers = headers;
         }
-        
+
 
         public int StatusCode { get; }
         public List<string> Headers { get; }
-
     }
 }

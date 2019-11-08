@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace StdOutLogger.Models
+namespace HT.StdOutLogger.Models
 {
     public readonly struct HttpContextLog
     {
-        public HttpContextLog(string traceId, DateTime createdAt, FormattedHttpRequest httpRequest = default, FormattedHttpResponse httpResponse = default)
+        public HttpContextLog(string traceId, DateTime createdAt, FormattedHttpRequest httpRequest = default,
+            FormattedHttpResponse httpResponse = default)
         {
             CreatedAt = Equals(createdAt, default)
                 ? string.Empty

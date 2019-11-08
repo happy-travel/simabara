@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
-namespace StdOutLogger.Internals
+namespace HT.StdOutLogger.Internals
 {
     internal class LoggerProcessor : IDisposable
     {
@@ -66,7 +66,8 @@ namespace StdOutLogger.Internals
             {
                 // ignored
             }
-            catch (AggregateException ex) when (ex.InnerExceptions.Count == 1 && ex.InnerExceptions[0] is TaskCanceledException)
+            catch (AggregateException ex) when (ex.InnerExceptions.Count == 1 &&
+                                                ex.InnerExceptions[0] is TaskCanceledException)
             {
                 // ignored
             }

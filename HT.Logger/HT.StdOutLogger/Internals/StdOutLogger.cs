@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HT.StdOutLogger.Options;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using StdOutLogger.Options;
 
-namespace StdOutLogger.Internals
+namespace HT.StdOutLogger.Internals
 {
     internal class StdOutLogger : ILogger
     {
@@ -18,16 +18,16 @@ namespace StdOutLogger.Internals
         }
 
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception,
+            Func<TState, Exception, string> formatter)
         {
             if (!IsEnabled(logLevel))
                 return;
 
             var messageBuilder = new StringBuilder(formatter != null ? formatter(state, exception) : string.Empty);
-            
 
             var parameters = GetParameters(state);
-             
+
             var jObject = JObject.FromObject(new
             {
                 LogName = _name,
@@ -39,7 +39,6 @@ namespace StdOutLogger.Internals
                 Exception = exception?.ToString(),
                 Scopes = GetScopeData()
             }, JsonSerializer.Create(Options.JsonSerializerSettings));
-            
 
             _loggerProcessor.Log(jObject.ToString(Formatting.None));
         }
@@ -48,7 +47,8 @@ namespace StdOutLogger.Internals
         private object GetParameters<TState>(TState state)
         {
             if (state is IEnumerable<KeyValuePair<string, object>> parameters)
-                return parameters.Where(p => !Options.SkippedJsonParameters.Contains(p.Key)).ToDictionary(i => i.Key, i => i.Value);
+                return parameters.Where(p => !Options.SkippedJsonParameters.Contains(p.Key))
+                    .ToDictionary(i => i.Key, i => i.Value);
             return state;
         }
 
@@ -67,13 +67,12 @@ namespace StdOutLogger.Internals
                         array.AddFirst(jScope.ToObject<List<object>>());
                     else if (jScope is JObject)
                         array.AddFirst(jScope.ToObject<object>());
-
-
                 }, jArray);
             }
+
             return jArray;
         }
-        
+
 
         private void GetScopeMessage(StringBuilder stringBuilder)
         {
@@ -87,10 +86,16 @@ namespace StdOutLogger.Internals
         }
 
 
-        public bool IsEnabled(LogLevel logLevel) => logLevel != LogLevel.None;
+        public bool IsEnabled(LogLevel logLevel)
+        {
+            return logLevel != LogLevel.None;
+        }
 
 
-        public IDisposable BeginScope<TState>(TState state) => ScopeProvider?.Push(state) ?? NullScope.Instance;
+        public IDisposable BeginScope<TState>(TState state)
+        {
+            return ScopeProvider?.Push(state) ?? NullScope.Instance;
+        }
 
 
         public StdOutLoggerOptions Options

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using HT.StdOutLogger.Internals;
+using HT.StdOutLogger.Models;
 using Microsoft.AspNetCore.Http;
-using StdOutLogger.Internals;
-using StdOutLogger.Models;
 
-namespace StdOutLogger
+namespace HT.StdOutLogger
 {
-    public class HttpContextLogger: IHttpContextLogger
+    public class HttpContextLogger : IHttpContextLogger
     {
         public async Task AddHttpRequest(HttpRequest httpRequest)
         {
@@ -20,8 +20,11 @@ namespace StdOutLogger
             _formattedHttpResponse = HttpLogHelper.GetFormattedHttpResponse(httpResponse);
         }
 
-        
-        public HttpContextLog GetHttpContextLogModel() => new HttpContextLog(_traceId, DateTime.UtcNow, _formattedHttpRequest, _formattedHttpResponse);
+
+        public HttpContextLog GetHttpContextLogModel()
+        {
+            return new HttpContextLog(_traceId, DateTime.UtcNow, _formattedHttpRequest, _formattedHttpResponse);
+        }
 
 
         private string _traceId;

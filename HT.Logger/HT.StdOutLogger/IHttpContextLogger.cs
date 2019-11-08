@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
+using HT.StdOutLogger.Models;
 using Microsoft.AspNetCore.Http;
-using StdOutLogger.Models;
 
-namespace StdOutLogger
+namespace HT.StdOutLogger
 {
     public interface IHttpContextLogger
     {

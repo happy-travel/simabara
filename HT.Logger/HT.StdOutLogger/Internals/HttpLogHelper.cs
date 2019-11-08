@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HT.StdOutLogger.Models;
 using Microsoft.AspNetCore.Http;
-using StdOutLogger.Models;
 
-namespace StdOutLogger.Internals
+namespace HT.StdOutLogger.Internals
 {
     internal static class HttpLogHelper
     {
@@ -40,11 +40,15 @@ namespace StdOutLogger.Internals
 
 
         private static List<string> GetFormattedHeaders(IHeaderDictionary headerDictionary)
-            => headerDictionary.Where(h => h.Value.Any()).Select(h => $"{h.Key}: {h.Value.First()}").ToList();
+        {
+            return headerDictionary.Where(h => h.Value.Any()).Select(h => $"{h.Key}: {h.Value.First()}").ToList();
+        }
 
 
         public static string GetTraceId(HttpRequest httpRequest)
-            => httpRequest.Headers.FirstOrDefault(i => i.Key.Equals(TraceIdHeader)).Value.FirstOrDefault();
+        {
+            return httpRequest.Headers.FirstOrDefault(i => i.Key.Equals(TraceIdHeader)).Value.FirstOrDefault();
+        }
 
 
         private static async Task<string> GetRequestBody(HttpRequest httpRequest)

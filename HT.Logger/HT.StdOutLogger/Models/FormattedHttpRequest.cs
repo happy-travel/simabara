@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace StdOutLogger.Models
+namespace HT.StdOutLogger.Models
 {
     public readonly struct FormattedHttpRequest
     {
-        public FormattedHttpRequest(string traceIdentifier, string method, string host, string path, List<string> headers, string requestBody)
+        public FormattedHttpRequest(string traceIdentifier, string method, string host, string path,
+            List<string> headers, string requestBody)
         {
             TraceIdentifier = traceIdentifier;
             Method = method;

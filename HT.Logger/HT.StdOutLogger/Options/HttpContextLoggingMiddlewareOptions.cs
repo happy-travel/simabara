@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StdOutLogger.Options
+namespace HT.StdOutLogger.Options
 {
     public class HttpContextLoggingMiddlewareOptions
     {

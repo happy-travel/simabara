@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
+using HT.StdOutLogger.Extensions;
+using HT.StdOutLogger.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using StdOutLogger.Extensions;
-using StdOutLogger.Options;
 
-namespace StdOutLogger
+namespace HT.StdOutLogger
 {
     public class HttpContextLoggingMiddleware
     {
@@ -15,7 +15,8 @@ namespace StdOutLogger
         }
 
 
-        public async Task Invoke(HttpContext httpContext, IHttpContextLogger httpContextLogger, ILogger<HttpContextLoggingMiddleware> logger)
+        public async Task Invoke(HttpContext httpContext, IHttpContextLogger httpContextLogger,
+            ILogger<HttpContextLoggingMiddleware> logger)
         {
             if (_options.IgnoredPaths.Contains(httpContext.Request.Path))
             {
@@ -29,7 +30,7 @@ namespace StdOutLogger
                 if (_options.LogInMiddleware)
                 {
                     var httpContextLogModel = httpContextLogger.GetHttpContextLogModel();
-                    logger.LogInformationToJson(default,string.Empty, httpContextLogModel);
+                    logger.LogInformationToJson(default, string.Empty, httpContextLogModel);
                 }
             }
         }
