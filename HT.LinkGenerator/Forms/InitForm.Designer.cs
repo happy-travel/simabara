@@ -49,6 +49,7 @@ namespace HT.LinkGenerator.Forms
             this.ClientSize = new System.Drawing.Size(164, 62);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
