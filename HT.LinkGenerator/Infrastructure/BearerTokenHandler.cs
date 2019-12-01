@@ -2,6 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using Serilog;
 
 namespace HT.LinkGenerator.Infrastructure
 {
@@ -17,12 +18,14 @@ namespace HT.LinkGenerator.Infrastructure
             HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
+            Log.Debug($"Handling request to '{request.RequestUri}' using {nameof(BearerTokenHandler)}");
             request.SetBearerToken(await GetToken());
             return await base.SendAsync(request, cancellationToken);
         }
 
         private async Task<string> GetToken()
         {
+            Log.Debug($"Requesting token from '{_identityUrl}'");
             var tokenResponse = await IdentityHttpClient.RequestClientCredentialsTokenAsync(
                 new ClientCredentialsTokenRequest
                 {
@@ -33,8 +36,12 @@ namespace HT.LinkGenerator.Infrastructure
                 });
 
             if (tokenResponse.IsError)
+            {
+                Log.Warning($"Failed to authorize on identity server: '{tokenResponse.Error}'");
                 throw new HttpRequestException("Authorization failed");
+            }
                 
+            Log.Debug("Access token retrieved");    
             return tokenResponse.AccessToken;
         }
         
