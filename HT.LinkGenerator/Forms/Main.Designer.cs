@@ -66,7 +66,6 @@
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(198, 27);
             this.priceTextBox.TabIndex = 10;
-            this.priceTextBox.Text = "0.00";
             this.priceTextBox.TextChanged += new System.EventHandler(this.priceTextBox_TextChanged);
             // 
             // label1
