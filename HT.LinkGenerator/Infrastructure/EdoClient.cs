@@ -25,7 +25,7 @@ namespace HT.LinkGenerator.Infrastructure
             if(await IsVersionNotSupported())
                 throw new Exception("Version is not supported. Please install a new version of this app");
             
-            Log.Debug($"Getting shared settings from {_apiUrl}");
+            Log.Information($"Getting shared settings from {_apiUrl}");
             var settingsString = await _edoHttpClient
                 .GetStringAsync(UrlHelper.CombineUri(_apiUrl, GetSettingsUrl));
 
@@ -50,7 +50,7 @@ namespace HT.LinkGenerator.Infrastructure
         public async Task SendLink(PaymentLinkData linkData)
         {
             var requestString = JsonConvert.SerializeObject(linkData);
-            Log.Debug($"Sending link to e-mail. Link data: {requestString}");
+            Log.Information($"Sending link to e-mail. Link data: {requestString}");
             var result = await _edoHttpClient.PostAsync(UrlHelper.CombineUri(_apiUrl, SendLinkUrl),
                 new StringContent(requestString, Encoding.UTF8, "application/json"));
 
@@ -64,7 +64,7 @@ namespace HT.LinkGenerator.Infrastructure
         public async Task<string> GenerateUrl(PaymentLinkData linkData)
         {
             var requestString = JsonConvert.SerializeObject(linkData);
-            Log.Debug($"Sending link to e-mail. Link data: {requestString}");
+            Log.Information($"Sending link to e-mail. Link data: {requestString}");
             var result = await _edoHttpClient.PostAsync(UrlHelper.CombineUri(_apiUrl, GenerateLinkUrl),
                 new StringContent(requestString, Encoding.UTF8, "application/json"));
 

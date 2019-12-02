@@ -16,7 +16,7 @@ namespace HT.LinkGenerator
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Is(GetLogLevel())
-                .WriteTo.File("logs\\app.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs\\ht-linkgenerator.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             Log.Information("Starting application...");
