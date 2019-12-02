@@ -119,6 +119,7 @@ namespace HT.LinkGenerator.Forms
             serviceTypeComboBox.ValueMember =  nameof(KeyValuePair<string, string>.Key);
             serviceTypeComboBox.DisplayMember = nameof(KeyValuePair<string, string>.Value);
             serviceTypeComboBox.DataSource = _linkSettings.ServiceTypes.ToList();
+            priceTextBox.Text = 0.00.ToString("F");
         }
 
         private void comboBox_Changed(object sender, EventArgs e)

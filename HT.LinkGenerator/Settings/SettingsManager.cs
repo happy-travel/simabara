@@ -1,6 +1,8 @@
 using System.Configuration;
 using System.Reflection;
 using HT.LinkGenerator.Infrastructure;
+using Newtonsoft.Json;
+using Serilog;
 
 namespace HT.LinkGenerator.Settings
 {
@@ -8,8 +10,10 @@ namespace HT.LinkGenerator.Settings
     {
         public static AppSettings Get()
         {
+            var settingsPath = Assembly.GetExecutingAssembly().Location;
+            Log.Debug($"Loading settings from {settingsPath}");
             var configuration = ConfigurationManager.
-                OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+                OpenExeConfiguration(settingsPath);
 
             var appSettings = configuration.AppSettings.Settings;
             var clientSecret = StringEncryptor.DecryptString(appSettings[nameof(AppSettings.ClientSecret)]?.Value);
@@ -21,6 +25,7 @@ namespace HT.LinkGenerator.Settings
 
         public static void Set(AppSettings settings)
         {
+            Log.Debug($"Saving settings to file: '{JsonConvert.SerializeObject(settings)}'");
             var configuration = ConfigurationManager.
                 OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
 

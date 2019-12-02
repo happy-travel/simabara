@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Windows.Forms;
 using HT.LinkGenerator.Infrastructure;
 using HT.LinkGenerator.Settings;
+using Newtonsoft.Json;
+using Serilog;
 
 namespace HT.LinkGenerator.Forms
 {
@@ -16,6 +18,7 @@ namespace HT.LinkGenerator.Forms
         private void Options_Load(object sender, EventArgs e)
         {
             var settings = SettingsManager.Get();
+            Log.Debug($"Load settings complete");
             identityUrlTextBox.Text = settings.IdentityUrl;
             apiUrlTextBox.Text = settings.ApiUrl;
             clientSecretTextBox.Text = settings.ClientSecret.ToInsecureString();
@@ -40,17 +43,21 @@ namespace HT.LinkGenerator.Forms
             var settings = new AppSettings(identityUrlTextBox.Text, apiUrlTextBox.Text, clientSecretTextBox.Text.ToSecureString());
             try
             {
+                Log.Debug($"Validating settings: {JsonConvert.SerializeObject(settings)}");
                 await EdoClientProvider.Create(settings)
                     .GetSharedSettings()
                     .ConfigureAwait(true);
             }
             catch (Exception ex) when (ex is HttpRequestException || ex is InvalidOperationException )
             {
+                Log.Warning($"Failed to validate settings: {ex.Message}");
+                Log.Debug($"Error stacktrace: '{ex.StackTrace}'");
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             SettingsManager.Set(settings);
+            Log.Debug("Saving settings to file");
             DialogResult = DialogResult.OK;
             Close();
         }
