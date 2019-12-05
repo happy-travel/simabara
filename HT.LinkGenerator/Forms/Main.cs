@@ -109,7 +109,7 @@ namespace HT.LinkGenerator.Forms
             return new PaymentLinkData(Convert.ToDecimal(priceTextBox.Text),
                 eMailTextBox.Text,
                 Convert.ToString(serviceTypeComboBox.SelectedValue),
-                Enum.Parse<Currencies>(currenciesComboBox.Text),
+                currenciesComboBox.Text,
                 commentsTextBox.Text);
         }
 
