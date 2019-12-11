@@ -17,3 +17,7 @@ jobs:
       run: dotnet build --configuration Release
     - name: Publish exe
       run: dotnet publish -r win-x64 -c Release --self-contained
+    - name: dir2
+      run: dir ..\
+    - name: dir
+      run: dir D:\a\simabara\simabara\HT.LinkGenerator\bin\Release\netcoreapp3.0\win-x64\publish\
