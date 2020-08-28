@@ -30,7 +30,7 @@ namespace HT.LinkGenerator.Infrastructure
                 new ClientCredentialsTokenRequest
                 {
                     Address = UrlHelper.CombineUri(_identityUrl, "/connect/token"),
-                    ClientId = "linkGenerator",
+                    ClientId = "link_generator",
                     ClientSecret = _clientSecret,
                     Scope = "edo"
                 });
