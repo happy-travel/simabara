@@ -6,7 +6,7 @@
         <UseWindowsForms>true</UseWindowsForms>
         <Company>Happy Travel</Company>
         <Product>Link Generator</Product>
-        <AssemblyVersion>0.2.3</AssemblyVersion>
+        <AssemblyVersion>0.2.4</AssemblyVersion>
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     </PropertyGroup>
 
