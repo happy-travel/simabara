@@ -37,13 +37,13 @@ namespace HT.LinkGenerator.Infrastructure
                 Log.Debug("Checking app version against server's supported versions");
                 var supportedVersionsString = await _edoHttpClient.GetStringAsync(UrlHelper.CombineUri(_apiUrl, SupportedVersionsUrl));
                 var supportedVersions = JsonConvert
-                    .DeserializeObject<List<DeserializableVersion>>(supportedVersionsString);
+                    .DeserializeObject<List<Version>>(supportedVersionsString);
 
                 var appVersion = Assembly.GetExecutingAssembly().GetName().Version;
                 Log.Debug($"App version: '{appVersion}', supported versions: {string.Join(";", supportedVersions)}");
 
-                return !supportedVersions.Any(v => v.Version.Major == appVersion.Major &&
-                                                  v.Version.Minor == appVersion.Minor);
+                return !supportedVersions.Any(v => v.Major == appVersion.Major &&
+                                                  v.Minor == appVersion.Minor);
             }
         }
 
