@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace HT.LinkGenerator.Forms
+namespace HappyTravel.Simabara.Forms
 {
     public partial class GeneratedLink : Form
     {

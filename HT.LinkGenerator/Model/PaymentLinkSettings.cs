@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace HT.LinkGenerator.Model
+namespace HappyTravel.Simabara.Model
 {
     public class PaymentLinkSettings
     {

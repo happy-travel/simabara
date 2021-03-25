@@ -1,10 +1,10 @@
 using System;
 using System.Windows.Forms;
-using HT.LinkGenerator.Forms;
+using HappyTravel.Simabara.Forms;
 using Serilog;
 using Serilog.Events;
 
-namespace HT.LinkGenerator
+namespace HappyTravel.Simabara
 {
     static class Program
     {
