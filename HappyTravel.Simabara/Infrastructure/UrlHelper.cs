@@ -1,6 +1,6 @@
 using System;
 
-namespace HT.LinkGenerator.Infrastructure
+namespace HappyTravel.Simabara.Infrastructure
 {
     public static class UrlHelper
     {

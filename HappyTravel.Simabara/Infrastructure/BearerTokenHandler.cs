@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using IdentityModel.Client;
 using Serilog;
 
-namespace HT.LinkGenerator.Infrastructure
+namespace HappyTravel.Simabara.Infrastructure
 {
     public class BearerTokenHandler : DelegatingHandler
     {

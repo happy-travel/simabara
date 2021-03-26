@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using HT.LinkGenerator.Infrastructure;
-using HT.LinkGenerator.Model;
-using HT.LinkGenerator.Settings;
+using HappyTravel.Simabara.Infrastructure;
+using HappyTravel.Simabara.Model;
+using HappyTravel.Simabara.Settings;
 
-namespace HT.LinkGenerator.Forms
+namespace HappyTravel.Simabara.Forms
 {
     public partial class Main : Form
     {

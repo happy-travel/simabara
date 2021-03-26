@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using HT.LinkGenerator.Model;
+using HappyTravel.Simabara.Model;
 using Newtonsoft.Json;
 using Serilog;
 
-namespace HT.LinkGenerator.Infrastructure
+namespace HappyTravel.Simabara.Infrastructure
 {
     public class EdoClient : IDisposable
     {

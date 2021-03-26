@@ -3,7 +3,7 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace HT.LinkGenerator.Infrastructure
+namespace HappyTravel.Simabara.Infrastructure
 {
     public static class StringEncryptor
     {

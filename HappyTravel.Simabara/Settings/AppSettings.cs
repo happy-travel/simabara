@@ -1,6 +1,6 @@
 using System.Security;
 
-namespace HT.LinkGenerator.Settings
+namespace HappyTravel.Simabara.Settings
 {
     public class AppSettings
     {

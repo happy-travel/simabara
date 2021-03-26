@@ -1,6 +1,6 @@
-using HT.LinkGenerator.Settings;
+using HappyTravel.Simabara.Settings;
 
-namespace HT.LinkGenerator.Infrastructure
+namespace HappyTravel.Simabara.Infrastructure
 {
     public static class EdoClientProvider
     {

@@ -1,4 +1,4 @@
-namespace HT.LinkGenerator.Model
+namespace HappyTravel.Simabara.Model
 {
     public readonly struct PaymentLinkData
     {

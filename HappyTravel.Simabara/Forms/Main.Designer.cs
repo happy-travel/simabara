@@ -1,4 +1,4 @@
-﻿namespace HT.LinkGenerator.Forms
+﻿namespace HappyTravel.Simabara.Forms
 {
     partial class Main
     {

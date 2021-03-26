@@ -1,12 +1,12 @@
 using System;
 using System.Net.Http;
 using System.Windows.Forms;
-using HT.LinkGenerator.Infrastructure;
-using HT.LinkGenerator.Settings;
+using HappyTravel.Simabara.Infrastructure;
+using HappyTravel.Simabara.Settings;
 using Newtonsoft.Json;
 using Serilog;
 
-namespace HT.LinkGenerator.Forms
+namespace HappyTravel.Simabara.Forms
 {
     public partial class Options : Form
     {

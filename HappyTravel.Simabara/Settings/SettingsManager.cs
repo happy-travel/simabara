@@ -1,10 +1,10 @@
 using System.Configuration;
 using System.Reflection;
-using HT.LinkGenerator.Infrastructure;
+using HappyTravel.Simabara.Infrastructure;
 using Newtonsoft.Json;
 using Serilog;
 
-namespace HT.LinkGenerator.Settings
+namespace HappyTravel.Simabara.Settings
 {
     public static class SettingsManager
     {
